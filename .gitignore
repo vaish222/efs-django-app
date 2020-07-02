@@ -8,3 +8,4 @@ misc.xml
 *.iml
 workspace.xml
 local_settings.py
+.idea
