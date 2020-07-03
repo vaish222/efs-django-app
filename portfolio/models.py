@@ -74,12 +74,12 @@ class Stock(models.Model):
 
     def current_stock_price(self):
         symbol_f = str(self.symbol)
-        main_api = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol='
+        main_api = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol='
         api_key = '&interval=1min&apikey=MSPGABV9W2FVPDPS'
         url = main_api + symbol_f + api_key
         json_data = requests.get(url).json()
-        mkt_dt = (json_data["Meta Data"]["3. Last Refreshed"])
-        open_price = float(json_data["Time Series (1min)"][mkt_dt]["1. open"])
+        #mkt_dt = (json_data["Meta Data"]["3. Last Refreshed"])
+        open_price = float(json_data["Global Quote"]["02. open"])
         share_value = open_price
         return share_value
 
