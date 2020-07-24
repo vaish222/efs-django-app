@@ -46,7 +46,7 @@
                 <tr>
                     <td>{{ sum_of_initial_stock_value|addition:sum_acquired_value|floatformat:2|intcomma }}</td>
                     <td>{{ sum_current_stocks_value|addition:sum_recent_value|floatformat:2|intcomma }}</td>
-                    <td>{{ overall_investment_results|addition:overall_stocks_results|floatformat:2|intcomma }}</td>
+                    <td>{{ overall_investment_results|addition:overall_stocks_results|floatformat:2|intcomma }} or €{{ decimal_exchange_value }}</td>
                 </tr>
             </tbody>
         </table>

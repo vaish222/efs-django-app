@@ -169,6 +169,14 @@ def portfolio(request,pk):
 
     overall_stocks_results = Decimal(sum_current_stocks_value) - sum_of_initial_stock_value
 
+    main_api = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=EUR'
+    api_key = '&interval=1min&apikey=MSPGABV9W2FVPDPS'
+    url = main_api + api_key
+    json_data = requests.get(url).json()
+    exchange_price = float(json_data["Realtime Currency Exchange Rate"]["5. Exchange Rate"])
+    exchange_value = exchange_price * float(overall_stocks_results + overall_investment_results)
+    decimal_exchange_value = round(exchange_value,2)
+
     return render(request, 'portfolio/portfolio.html', {'customers': customers,
                                                        'investments': investments,
                                                        'stocks': stocks,
@@ -177,7 +185,8 @@ def portfolio(request,pk):
                                                        'sum_current_stocks_value': sum_current_stocks_value,
                                                        'sum_of_initial_stock_value': sum_of_initial_stock_value,
                                                        'overall_investment_results':overall_investment_results,
-                                                       'overall_stocks_results':overall_stocks_results,})
+                                                       'overall_stocks_results':overall_stocks_results,
+                                                       'decimal_exchange_value':decimal_exchange_value})
 
 
 # List at the end of the views.py
